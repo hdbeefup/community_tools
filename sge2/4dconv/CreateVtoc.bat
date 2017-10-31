@@ -1,0 +1,1 @@
+dir *.4d /B >vtoc.txt

@@ -1,0 +1,15 @@
+SGE1 - S.W.I.N.E.
+Map Editing (with tools):
+http://hede.spaceweb.hu/php-files/download/palyaszerkesztes_.zip W/ Tools
+http://hede.spaceweb.hu/php-files/download/palyaszerkesztes.zip W/ tools... is different
+
+SGE2 - GEPARD 2 BASE
+
+MODDING/SKINNING: http://panzers.ucoz.com/load/0-0-0-31-20
+
+
+SGE3 - GEPARD3 BASE (Only Panzers Cold War)
+
+MODDING CP:CW
+PART 1: http://panzers.ucoz.com/load/0-0-0-62-20
+PART 2: http://panzers.ucoz.com/load/0-0-0-63-20
