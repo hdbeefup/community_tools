@@ -1,0 +1,447 @@
+//------------------------------------------------
+//--- 010 Editor v9.0.2 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+enum <int> SrDifficulty {
+    EASY, NORMAL, HARD
+};
+enum <int> SrRace {
+    RABBIT, PIG
+};
+enum <int> SrUnitUpgrade {
+    FUEL,
+    AMMO,
+    BINOCULARS,
+    MINESWEEPER,
+    ARMOR,
+    REPAIR,
+    TURBO,
+    ROCK_BEER,
+    ENERGY_DRINK,
+
+    NONE = -1
+};
+enum <int> SrUnitTier {
+    GREENHORN, VETERAN, ELITE
+};
+enum <int> SrMissionStatus {
+    IN_PROGRESS, VICTORY, DEFEAT
+};
+
+enum <uint> SrTriggerConditionType {
+    CND_ALWAYS,
+    CND_NEVER,
+    CND_BRING,
+    CND_COMMAND,
+    CND_ELAPSED_TIME,
+    CND_SWITCH,
+    CND_COUNTDOWN_TIMER,
+    CND_COUNTDOWN_ACTIVE,
+    CND_BRING_ACTIVE,
+    CND_OBJECT,
+    CND_AMMO,
+    CND_FUEL,
+    CND_NOT_HIGHEST_SCORE,
+    CND_PULLER_ATTACHED,
+    CND_T_SELECTED_UNIT,
+    CND_T_UNIT_SPEC_MODE,
+    CND_HP
+};
+
+enum <uint> SrTriggerActionType {
+    ACT_PAUSE_GAME,
+    ACT_REMOVE_UNIT,
+    ACT_KILL_UNIT,
+    ACT_PRESERVE_TRIGGER,
+    ACT_CREATE_UNIT,
+    ACT_MOVE_UNIT,
+    ACT_SET_SWITCH,
+    ACT_SPEECH,
+    ACT_WAIT,
+    ACT_START_COUNTDOWN,
+    ACT_VICTORY,
+    ACT_DEFEAT,
+    ACT_AIRSTRIKE,
+    ACT_PATROL_UNIT,
+    ACT_ACTIVATE_OBJECT,
+    ACT_ATTACK_OBJECT,
+    ACT_TRANSPORT,
+    ACT_PULL_ATTACH,
+    ACT_PULL_DETACH,
+    ACT_FOCUS_CAMERA,
+    ACT_SET_PLAYER,
+    ACT_DEMOLISH_OBJECT,
+    ACT_PREPARE_FLOOD,
+    ACT_RAISE_FLOOD,
+    ACT_HIDE_COUNTDOWN,
+    ACT_NUCLEAR_ATTACK,
+    ACT_START_ZEPPELIN,
+    ACT_T_SET_SP,
+    ACT_T_SET_HP,
+    ACT_T_SET_AMMO,
+    ACT_T_SET_FUEL,
+    ACT_T_PLAY_SPEECH,
+    ACT_T_SHOW_TEXT,
+    ACT_T_HIDE_TEXT,
+    ACT_LOAD_UNIT,
+    ACT_DEFEAT_COUNTDOWN,
+    ACT_CTF_ADD_POINT
+};
+
+// STriggerCondition::GetPropertyMask()
+local uint CndPropMask[32];
+    CndPropMask[CND_ALWAYS]            = 0;  // 0
+    CndPropMask[CND_NEVER]             = 0;  // 1
+    CndPropMask[CND_BRING]             = 15; // 2
+    CndPropMask[CND_COMMAND]           = 11; // 3
+    CndPropMask[CND_ELAPSED_TIME]      = 2;  // 4
+    CndPropMask[CND_SWITCH]            = 64; // 5
+    CndPropMask[CND_COUNTDOWN_TIMER]   = 2;  // 6
+    CndPropMask[CND_COUNTDOWN_ACTIVE]  = 11; // 7
+    CndPropMask[CND_BRING_ACTIVE]      = 15; // 8
+    CndPropMask[CND_OBJECT]            = 6;  // 9
+    CndPropMask[CND_AMMO]              = 15; // 10
+    CndPropMask[CND_FUEL]              = 15; // 11
+    CndPropMask[CND_NOT_HIGHEST_SCORE] = 0;  // 12
+    CndPropMask[CND_PULLER_ATTACHED]   = 15; // 13
+    CndPropMask[CND_T_SELECTED_UNIT]   = 15; // 14
+    CndPropMask[CND_T_UNIT_SPEC_MODE]  = 15; // 15
+    CndPropMask[CND_HP]                = 15; // 16
+
+// STriggerAction:GetPropertyMask()
+local uint ActPropMask[64];
+    ActPropMask[ACT_PAUSE_GAME]       = 0;   // 0
+    ActPropMask[ACT_REMOVE_UNIT]      = 13;  // 1
+    ActPropMask[ACT_KILL_UNIT]        = 13;  // 2
+    ActPropMask[ACT_PRESERVE_TRIGGER] = 0;   // 3
+    ActPropMask[ACT_CREATE_UNIT]      = 49;  // 4
+    ActPropMask[ACT_MOVE_UNIT]        = 45;  // 5
+    ActPropMask[ACT_SET_SWITCH]       = 128; // 6
+    ActPropMask[ACT_SPEECH]           = 269; // 7
+    ActPropMask[ACT_WAIT]             = 256; // 8
+    ActPropMask[ACT_START_COUNTDOWN]  = 256; // 9
+    ActPropMask[ACT_VICTORY]          = 0;   // 10
+    ActPropMask[ACT_DEFEAT]           = 0;   // 11
+    ActPropMask[ACT_AIRSTRIKE]        = 33;  // 12
+    ActPropMask[ACT_PATROL_UNIT]      = 45;  // 13
+    ActPropMask[ACT_ACTIVATE_OBJECT]  = 4;   // 14
+    ActPropMask[ACT_ATTACK_OBJECT]    = 45;  // 15
+    ActPropMask[ACT_TRANSPORT]        = 49;  // 16
+    ActPropMask[ACT_PULL_ATTACH]      = 45;  // 17
+    ActPropMask[ACT_PULL_DETACH]      = 4;   // 18
+    ActPropMask[ACT_FOCUS_CAMERA]     = 32;  // 19
+    ActPropMask[ACT_SET_PLAYER]       = 13;  // 20
+    ActPropMask[ACT_DEMOLISH_OBJECT]  = 4;   // 21
+    ActPropMask[ACT_PREPARE_FLOOD]    = 260; // 22
+    ActPropMask[ACT_RAISE_FLOOD]      = 260; // 23
+    ActPropMask[ACT_HIDE_COUNTDOWN]   = 0;   // 24
+    ActPropMask[ACT_NUCLEAR_ATTACK]   = 37;  // 25
+    ActPropMask[ACT_START_ZEPPELIN]   = 33;  // 26
+    ActPropMask[ACT_T_SET_SP]         = 256; // 27
+    ActPropMask[ACT_T_SET_HP]         = 269; // 28
+    ActPropMask[ACT_T_SET_AMMO]       = 269; // 29
+    ActPropMask[ACT_T_SET_FUEL]       = 269; // 30
+    ActPropMask[ACT_T_PLAY_SPEECH]    = 256; // 31
+    ActPropMask[ACT_T_SHOW_TEXT]      = 256; // 32
+    ActPropMask[ACT_T_HIDE_TEXT]      = 0;   // 33
+    ActPropMask[ACT_LOAD_UNIT]        = 45;  // 34
+    ActPropMask[ACT_DEFEAT_COUNTDOWN] = 0;   // 35
+    ActPropMask[ACT_CTF_ADD_POINT]    = 0;   // 36
+    
+
+typedef struct {
+    float X;
+    float Y;
+    float Z;
+} Vector3f;
+
+
+
+typedef struct {
+    ushort len;
+    char   str[len];
+} SrString <read=SrString_ToString>;
+
+string SrString_ToString(SrString &value) {
+    return exists(value.str) ? "'" + value.str + "'" : "<zero len>";
+}
+
+
+typedef struct {
+    SrString      type;
+
+    SrUnitUpgrade upgrades[3];
+    SrUnitTier    tier;
+    
+    float exp;
+
+    byte survivor;
+    uint kills;
+} SrArmyCatalogEntry;
+
+
+typedef struct {
+    char kind[4];
+    uint size;
+
+    switch(kind) {
+        case "posi":
+            Vector3f pos;
+            float dir;
+            break;
+
+        case "upgr":
+            SrUnitUpgrade upgrades[3];
+            break;
+
+        case "szin":
+            uint color;
+            break;
+
+        case "plr3":
+            int team;
+
+            SrUnitTier tier;
+            float exp;
+
+            byte survivor;
+            uint kills;
+            break;
+
+        case "sts2":
+            float turretRotation;
+            float turretSlide;
+
+            float health;
+            float fuel;
+            float ammo;
+
+            float cargo;
+            break;
+
+        case "wrck":
+            uint turretDestroyed;
+            break;
+
+        default:
+            char raw[size];
+            break;
+    }
+} SrEntityProperty <read=SrEntityProperty_ToString>;
+
+string SrEntityProperty_ToString(SrEntityProperty &value) {
+    return value.kind;
+}
+
+
+typedef struct {
+    uint marker;
+
+    if (marker == 0)
+        return;
+
+    char kind[4];
+    uint len;
+
+    local uint end = FTell() + len;
+
+    SrString name;
+
+    while(FTell() < end) {
+        SrEntityProperty property;
+    }
+} SrEntitySlot <read=SrEntitySlot_ToString>;
+
+string SrEntitySlot_ToString(SrEntitySlot &value) {
+    return value.marker ? SrString_ToString(value.name) : "<none>";
+}
+
+struct SrSave_UNIT {
+    uint count;
+
+    SrEntitySlot entry[count] <optimize=false>;
+};
+
+
+
+
+
+
+typedef struct {
+    SrTriggerConditionType type;
+
+    local uint mask = CndPropMask[type];
+
+    if (mask & 1) {
+        uint player;
+    }
+    if (mask & 2) {
+        uint quantity;
+        uint quantityMore; // bool
+    }
+    if (mask & 4) {
+        uint location;
+    }
+    if (mask & 8) {
+        uint     unitType;
+        SrString unitClass;
+    }
+    if (mask & 64) {
+        uint switchSet;
+        uint switchNum;
+    }
+} SrTriggerCondition <read=SrTriggerCondition_ToString>;
+
+string SrTriggerCondition_ToString(SrTriggerCondition &value) {
+    return EnumToString(value.type);
+}
+
+typedef struct {
+    SrTriggerActionType type;
+
+    local uint mask = ActPropMask[type];
+
+    if (mask & 1) {
+        uint player;
+    }
+    if (mask & 4) {
+        uint location;
+    }
+    if (mask & 8) {
+        uint     unitType;
+        SrString unitClass;    
+    }
+    if (mask & 16) {
+        SrString newUnitClass;
+    }
+    if (mask & 32) {
+        uint destination;
+    }
+    if (mask & 128) { // Assembly odd.. either 64/128
+        uint switchOp;
+        uint switchNum;
+    }
+    if (mask & 256) {
+        uint number;
+    }
+} SrTriggerAction <read=SrTriggerAction_ToString>;
+
+string SrTriggerAction_ToString(SrTriggerAction &value) {
+    return EnumToString(value.type);
+}
+
+
+typedef struct {
+    uint unkn0;
+    SrString desc;
+
+    uint numConditions;
+    SrTriggerCondition conditions[numConditions] <optimize=false>;
+
+    uint numActions;
+    SrTriggerAction actions[numActions] <optimize=false>;
+} SrTrigger;
+
+struct SrSave_TRIG {
+    uint numTriggers;
+    SrTrigger triggers[numTriggers] <optimize=false>;
+};
+
+struct SrSave_HMAP {
+    uint sizeX;
+    uint sizeY;
+
+    char hmap[sizeX * sizeY];
+};
+
+typedef struct {
+    char name[120];
+
+    float posX;
+    float posZ;
+
+    int rotation;
+} SrShader;
+
+struct SrSave_SHDR {
+    uint numShaders;
+
+    SrShader shaders[numShaders];
+};
+
+typedef struct {    
+    char magic[8 + 4];
+    
+    uint size;
+    uint version;
+    
+    SrString mission;
+    SrString name;
+    
+    SrDifficulty difficulty;
+    SrRace race;
+    
+    uint startMoney;
+    
+    uint               armyCatalogLen;
+    SrArmyCatalogEntry armyCatalog[armyCatalogLen] <optimize=false>;
+    
+    uint currentMoney;
+    
+    SrString mission2;
+    SrMissionStatus status;
+} SrSaveHeader;
+
+typedef struct {
+    char kind[4];
+    uint size;
+
+    local uint begin = FTell();
+    local uint end   = FTell() + size;
+
+    // For visualization only
+    char raw[size];
+
+    FSeek(startof(raw));
+} SrFileSection <read=SrFileSection_ToString>;
+
+string SrFileSection_ToString(SrFileSection &value) {
+    return value.kind;
+}
+
+
+SrSaveHeader header;
+
+
+while(FTell() < header.size) {
+    SrFileSection section;
+
+    switch(section.kind) {
+        case "UNIT":
+            SrSave_UNIT units;
+            break;
+
+        case "TRIG":
+            SrSave_TRIG triggers;
+            break;
+
+        case "HMAP":
+            SrSave_HMAP hmap;
+            break;
+
+        case "SHDR":
+            SrSave_SHDR shaders;
+            break;
+    }
+
+    FSeek(section.end);
+}

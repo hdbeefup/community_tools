@@ -1,0 +1,8 @@
+4dconv "ge_fuel truck.4d"
+4dconv "ge_fuel truck_wreck_expl.4d"
+4dconv "ge_panther.4d"
+4dconv "ge_panther_wreck.4d"
+4dconv "ge_tiger.4d"
+4dconv "ge_tiger_wreck.4d"
+4dconv "ge_wirbelwind.4d"
+4dconv "ge_wirbelwind_expl.4d"

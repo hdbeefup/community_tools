@@ -1,0 +1,116 @@
+
+
+typedef struct {
+    ushort len;
+    char   str[len];
+} SrString <read=SrString_ToString>;
+
+string SrString_ToString(SrString &value) {
+    return exists(value.str) ? "'" + value.str + "'" : "<zero len>";
+}
+
+typedef struct {
+    char kind[4];
+    uint size;
+
+    local uint begin = FTell();
+    local uint end   = FTell() + size;
+
+    // For visualization only
+    char raw[size];
+
+    FSeek(begin);
+} SrFileSection <read=SrFileSection_ToString>;
+
+string SrFileSection_ToString(SrFileSection &value) {
+    return value.kind;
+}
+
+typedef struct {
+    SrFileSection section;
+
+    int numFaces;
+    
+    int vertexStart;
+    int vertexCount;
+
+    while(FTell() < section.end) {
+        SrFileSection part;
+
+        switch(part.kind) {
+            case "DIFF":
+                SrString diffuse;
+                break;
+
+            case "REFL":
+                SrString reflection;
+                break;
+
+            case "SILL":
+                SrString selfIllumination;
+                break;
+        }
+        
+        FSeek(part.end);        
+    }
+} SrMeshMaterial;
+
+typedef struct {
+    SrFileSection section;
+
+    SrString name;
+    int parent;
+
+    float transform[3*3];
+    float pos[3];
+
+    while(FTell() < section.end) {
+        SrFileSection part;        
+
+        switch(part.kind) {
+            case "BBOX":
+                float bbox[3 * 8]; // corners?
+                break;
+    
+            case "VERT":
+                uint vertexCount;
+                uint vertexFormatUnkn;
+    
+                struct {
+                    float pos[3];
+                    float normal[3];
+    
+                    float uv[2];
+                } vertex[vertexCount];
+    
+                break;
+    
+            case "FACE":
+                int numFaces;
+    
+                struct {
+                    short idx[3];
+                } face[numFaces];            
+    
+                break;
+    
+            case "MTLS":
+                int numMaterials;
+
+                SrMeshMaterial materials[numMaterials] <optimize=false>;
+                break;
+        }
+
+        FSeek(part.end);
+    }
+} SrMesh;
+
+
+char magic[8];
+
+SrFileSection header;
+char version[4]; // v100
+
+while(FTell() < header.end) {
+    SrMesh mesh;
+}

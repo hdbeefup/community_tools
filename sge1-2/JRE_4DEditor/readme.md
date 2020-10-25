@@ -1,6 +1,0 @@
-# SOURCE CODE IS UNOFFICIAL BECAUSE DECOMPILED WITH JD-GUI
-
-# SOURCE CODE AVAILABLE "OFFICIALLY" AT https://github.com/pcan/java-4d
-# THERE IS IMPROVEMENT VERSION AT https://github.com/pcan/panzers-4d-editor-test
-
-# SOURCE: MODDB
