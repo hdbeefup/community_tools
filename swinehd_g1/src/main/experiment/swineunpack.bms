@@ -1,0 +1,42 @@
+# Extract files from a Swine archive
+
+open archive.swine
+
+# Read the index offset and content offset from the beginning of the file
+get index_offset long
+get content_offset long
+
+# Read the number of files in the archive
+get num_files long
+
+# Loop through each file and extract it
+for i = 0 to num_files-1
+  # Read the name reuse, name length, and name fragment
+  get name_reuse long
+  get name_len long
+  get name_fragment string name_len
+  
+  # Read the offset and size of the file
+  get file_offset long
+  get file_size long
+  
+  # Read the flags and next pointer
+  get flags long
+  get next long
+  
+  # Compute the full file name by combining the name reuse and name fragment
+  if name_reuse > 0
+    string name_prefix = left(filename, name_reuse)
+  else
+    string name_prefix = ""
+  string file_name = name_prefix + name_fragment
+  
+  # Extract the file
+  log ""
+  log "Extracting file: " + file_name
+  savepos file_offset
+  get file_name file_size
+  savepos
+next
+
+close
